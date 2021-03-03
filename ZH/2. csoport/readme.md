@@ -4,11 +4,13 @@
 
 Letöltés és kicsomagolás után ebbe dolgozzatok. A feladatok külön mappákba vannak elkülönítve. Ezt a csomagot letömörítve töltsétek fel majd Canvasre. **Mindenki figyeljen arra, hogy jó csomagot töltsön fel!**
 
+https://github.com/anonymus1928/Kliensoldali/tree/master/ZH/2.%20csoport/csoportzh.zip
+
 ## Feladatok
 
 ### 1. Covid megyénkénti eloszlás (9 pont)
 
-A (Chart.js)[https://www.chartjs.org/] javascript könyvtár segítségével készíts egy adathalmazt tartalmazó tortadiagramot! A szükséges adatokat a ```1. feladat/index.js``` file ```data``` konstans változója tartalmazza.
+A [Chart.js](https://www.chartjs.org/) javascript könyvtár segítségével készíts egy adathalmazt tartalmazó tortadiagramot! A szükséges adatokat a ```1. feladat/index.js``` file ```data``` konstans változója tartalmazza.
 
 Példa a ```data``` tartalmára:
 ```json
@@ -22,12 +24,12 @@ Példa a ```data``` tartalmára:
 }
 ```
 
-1. (JSDelivr)[https://www.chartjs.org/docs/latest/getting-started/]-en keress rá a ```chart.js```-re (fejlesztő: chartjs) és az alapértelmezett csomagjának hivatkozását illeszd be az ```1. feladat/index.html``` file végére. Ügyelj arra, hogy az ```index.js``` mindenképpen a most beillesztett könyvtár **után** legyen! *(1 pont)*
+1. [JSDelivr](https://www.chartjs.org/docs/latest/getting-started/)-en keress rá a ```chart.js```-re (fejlesztő: chartjs) és az alapértelmezett csomagjának hivatkozását illeszd be az ```1. feladat/index.html``` file végére. Ügyelj arra, hogy az ```index.js``` mindenképpen a most beillesztett könyvtár **után** legyen! *(1 pont)*
 
 2. Készíts két tömböt (például: ```covid```, ```color```) és töltsd fel őket a ```data```-ban lévő ```object```-ek azonos nevű adattagjaival. Figyelj arra, hogy a ```covid``` tömbbe már számként kerüljenek be! (```parseInt()```) Ezt követően írd ki a két tömböt a ```console```-ra! *(3 pont)*
   - Tipp: Használd az ```Object.values(data)``` metódust!
 
-3. Készítsd el a diagramot a következő lépések mentén!<br>Minta: https://www.chartjs.org/docs/latest/getting-started/<br>Tortadiagram: https://www.chartjs.org/docs/latest/charts/doughnut.html *(5 pont)*
+3. Készítsd el a diagramot a következő lépések mentén! *(5 pont)*<br>Minta: https://www.chartjs.org/docs/latest/getting-started/<br>Tortadiagram: https://www.chartjs.org/docs/latest/charts/doughnut.html
   - A DOM-ból emeld ki a ```#covid``` azonosítójú ```canvas``` elemet!
   - Példányosítsd a ```Chart``` osztályt a ```new Chart(canvas, options)``` konstruktorral!
   - Az ```options```-ben a következő beállításokat végezd el!
