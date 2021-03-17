@@ -1,50 +1,48 @@
-import { React } from 'react';
-
 export function TrackDetails({ track }) {
-    return (
+    return (!track ? null :
         <div className="ui segment">
             <div className="ui items">
                 <div className="item">
                     <div className="image">
-                        <img src={track.thumbnailURL} />
+                        <img src={track.thumbnailURL} alt="" />
                     </div>
                     <div className="content">
-                        <a className="header">{track.title}</a>
+                        <div className="header">{track.title}</div>
                         <div className="meta">
                             <span>{track.artist}</span>
                             <span>{track.length}</span>
                         </div>
                         <div className="extra">
-                            {track.spotifyURL &&
-                                <a
+                            {track.spotifyURL && (
+                                <div
                                     href={track.spotifyURL}
                                     className="ui button tiny green button"
                                     target="_blank"
                                 >
                                     <i className="spotify icon"></i>
                                     Listen on Spotify
-                                </a>
-                            }
-                            {track.lyricsURL &&
-                                <a
+                                </div>
+                            )}
+                            {track.lyricsURL && (
+                                <div
                                     href={track.lyricsURL}
                                     className="ui button tiny teal button"
                                     target="_blank"
                                 >
                                     <i className="microphone icon"></i>
                                     Show lyrics
-                                </a>
-                            }
-                            {track.chordsURL &&
-                                <a
+                                </div>
+                            )}
+                            {track.chordsURL && (
+                                <div
                                     href={track.chordsURL}
                                     className="ui button tiny orange button"
                                     target="_blank"
                                 >
                                     <i className="guitar icon"></i>
                                     Show chords
-                                </a>
-                            }
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

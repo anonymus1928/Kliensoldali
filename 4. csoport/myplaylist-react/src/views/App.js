@@ -1,35 +1,27 @@
-import { React } from 'react';
-import { Menu } from './menu/Menu';
-import { PlaylistForm } from './playlists/PlaylistForm';
-import { PlaylistList } from './playlists/PlaylistList';
-import { TrackDetails } from './playlists/TrackDetails';
-import { Tracklist } from './playlists/Tracklist';
-
-import { examplePlaylists } from '../domain/playlist';
-import { exampleTracks } from '../domain/track';
-
+import { Layout } from "./layout/Layout";
+import { Home } from './home/Home';
+import { Playlist } from './playlists/Playlist';
+import { Tracks } from './tracks/Tracks';
+import { Search } from './search/Search';
+import { BrowserRouter, Route } from "react-router-dom";
 
 export function App() {
-    const selectedPlaylist = examplePlaylists[0];
-    const selectedTrack = exampleTracks[0];
     return (
-        <div className="ui container">
-            <Menu />
-            <div className="ui container">
-                <h1>My Playlists</h1>
-                <div className="ui stackable two column grid">
-                    <div className="ui six wide column">
-                        <h3>Playlists</h3>
-                        <PlaylistForm />
-                        <PlaylistList playlists={examplePlaylists} selectedPlaylistId={1} />
-                    </div>
-                    <div className="ui ten wide column">
-                        <Tracklist playlist={selectedPlaylist} selectedTrackId={1} />
-                    </div>
-                </div>
-                <div className="ui divider"></div>
-                <TrackDetails track={selectedTrack} />
-            </div>
-        </div>
+        <BrowserRouter>
+            <Layout>
+                <Route exact path="/">
+                    <Home />
+                </Route>
+                <Route path="/playlists/:playlistId?/:trackId?">
+                    <Playlist />
+                </Route>
+                <Route path="/tracks">
+                    <Tracks />
+                </Route>
+                <Route path="/search">
+                    <Search />
+                </Route>
+            </Layout>
+        </BrowserRouter>
     );
 }

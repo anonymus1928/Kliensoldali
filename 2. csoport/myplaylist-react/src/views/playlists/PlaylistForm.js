@@ -1,13 +1,26 @@
-import { React } from 'react';
+import { useRef, useState } from "react";
 
-export function PlaylistForm() {
+export function PlaylistForm({ onSubmit }) {
+    // Referenciával
+    // const inputRef = useRef(null);
+
+    // State-tel
+    const [value, setValue] = useState('');
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        // console.log(inputRef.current.value); // referencia
+
+        onSubmit(value);
+    }
     return (
-        <details>
+        <details open>
             <summary>Add new playlist</summary>
-            <div className="ui action input container">
-                <input value="" />
+            <form className="ui action input container" onSubmit={handleSubmit}>
+                {/* <input defaultValue="" ref={inputRef} /> */}
+                <input value={value} onChange={e => setValue(e.target.value)} />
                 <button className="ui primary button">Add</button>
-            </div>
+            </form>
         </details>
     );
 }
