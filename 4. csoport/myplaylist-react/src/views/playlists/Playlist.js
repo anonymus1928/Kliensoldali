@@ -10,22 +10,12 @@ import { exampleTracks } from '../../domain/track';
 import { useParams } from 'react-router';
 
 export function Playlist() {
-    const { playlistId: strPlaylistId, trackId: strTrackId } = useParams();
-    const playlistId = Number.parseInt(strPlaylistId);
-    const trackId = Number.parseInt(strTrackId);
-
-    const [selectedPlaylistId, setSelectedPlaylistId] = useState(playlistId);
-    const [selectedTrackId, setSelectedTrackId] = useState(trackId);
+    const { playlistId, trackId } = useParams();
 
     const [playlists, setPlaylists] = useState(examplePlaylists);
 
-    const selectedPlaylist = playlists.find((p) => p.id === selectedPlaylistId);
-    const selectedTrack = exampleTracks.find((t) => t.id === selectedTrackId);
-
-    function handlePlaylistChange(id) {
-        setSelectedPlaylistId(id);
-        setSelectedTrackId(null);
-    }
+    const selectedPlaylist = playlists.find((p) => p.id === playlistId);
+    const selectedTrack = exampleTracks.find((t) => t.id === trackId);
 
     const addNewPlaylist = (title) => {
         console.log(title);
@@ -43,15 +33,11 @@ export function Playlist() {
                     <PlaylistForm onSubmit={addNewPlaylist} />
                     <PlaylistList
                         playlists={playlists}
-                        selectedPlaylistId={selectedPlaylistId}
-                        onSelect={handlePlaylistChange}
                     />
                 </div>
                 <div className="ui ten wide column">
                     <Tracklist
                         playlist={selectedPlaylist}
-                        selectedTrackId={selectedTrackId}
-                        onSelect={setSelectedTrackId}
                     />
                 </div>
             </div>
