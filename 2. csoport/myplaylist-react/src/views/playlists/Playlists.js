@@ -7,35 +7,23 @@ import { Tracklist } from './Tracklist';
 
 import { exampleTracks } from '../../domain/track';
 import { examplePlaylists } from '../../domain/playlist';
+import { useParams } from 'react-router';
 
 export function Playlists() {
-    // const selectedPlaylistId = 1;
-    // const selectedTrackId = 1;
-    const [selectedPlaylistId, setSelectedPlaylistId] = useState(1);
-    const [selectedTrackId, setSelectedTrackId] = useState(1);
+    const { playlistId, trackId } = useParams();
 
-    
-    const [playlists, setPlaylists] = useState(examplePlaylists); // később...
-
+    const [playlists, setPlaylists] = useState(examplePlaylists);
 
     const selectedPlaylist = playlists.find(
-        (p) => p.id === selectedPlaylistId
+        (p) => p.id === playlistId
     );
-    const selectedTrack = exampleTracks.find((t) => t.id === selectedTrackId);
-
-
-
-
-    function handlePlaylistChange(id) {
-        setSelectedPlaylistId(id);
-        setSelectedTrackId(null); // error: nem voltunk felkészülve arra, hogy ez null
-    }
+    const selectedTrack = exampleTracks.find((t) => t.id === trackId);
 
     const addNewPlaylist = title => {
         console.log(title);
 
         const id = playlists.reduce((maxId, p) => Math.max(maxId, p.id), 0) + 1
-        setPlaylists([...playlists, {id, title, tracks: []}]) // playlists.push() nem jó!
+        setPlaylists([...playlists, {id, title, tracks: []}])
     }
 
     return (
@@ -47,15 +35,11 @@ export function Playlists() {
                     <PlaylistForm onSubmit={addNewPlaylist} />
                     <PlaylistLists
                         playlists={playlists}
-                        selectedPlaylistId={selectedPlaylistId}
-                        onSelect={/* setSelectedPlaylistId */ handlePlaylistChange}
                     />
                 </div>
                 <div className="ui ten wide column">
                     <Tracklist
                         playlist={selectedPlaylist}
-                        selectedTrackId={selectedTrackId}
-                        onSelect={setSelectedTrackId}
                     />
                 </div>
             </div>

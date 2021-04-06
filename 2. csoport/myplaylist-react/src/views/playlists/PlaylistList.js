@@ -1,15 +1,13 @@
-import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
 
-export function PlaylistLists({ playlists, selectedPlaylistId, onSelect }) {
+export function PlaylistLists({ playlists }) {
     return (
         <div className="ui very relaxed selection list">
             {playlists.map((playlist) => (
-                <div
-                    className={cn('item', {
-                        active: playlist.id === selectedPlaylistId,
-                    })}
+                <NavLink
+                    className="item"
                     key={playlist.id}
-                    onClick={() => onSelect(playlist.id)}
+                    to={`/playlists/${playlist.id}`}
                 >
                     <i className="large compact disc middle aligned icon"></i>
                     <div className="content">
@@ -18,7 +16,7 @@ export function PlaylistLists({ playlists, selectedPlaylistId, onSelect }) {
                             {playlist.tracks.length} songs
                         </div>
                     </div>
-                </div>
+                </NavLink>
             ))}
         </div>
     );
