@@ -1,14 +1,8 @@
-import { useState } from "react";
-
-export function Field({ label, placeholder, name }) {
-    const [value, setValue] = useState('');
-
-    const handleChange = e => setValue(e.target.value);
-
+export function Field({ label, placeholder, name, value, onChange, ...args }) {
     return (
         <div className="field">
             <label>{label}</label>
-            <input name={name} value={value} onChange={handleChange} required type="text" placeholder={placeholder} />
+            <input name={name} value={value} onChange={onChange} {...args} type="text" placeholder={placeholder} />
         </div>
     );
 }

@@ -1,29 +1,25 @@
-import { useState } from 'react';
-
 import { PlaylistForm } from './PlaylistForm';
 import { PlaylistList } from './PlaylistList';
 import { TrackDetails } from './TrackDetails';
 import { Tracklist } from './Tracklist';
 
-import { examplePlaylists } from '../../domain/playlist';
 import { exampleTracks } from '../../domain/track';
 import { useParams } from 'react-router';
+import { useContext } from 'react';
+import { PlaylistsContext } from '../../state/PlaylistsProvider';
 
 export function Playlist() {
     const { playlistId, trackId } = useParams();
 
-    const [playlists, setPlaylists] = useState(examplePlaylists);
+    const { playlists, addNewPlaylist } = useContext(PlaylistsContext);
 
-    const selectedPlaylist = playlists.find((p) => p.id === playlistId);
+    const playlistsWithTracks = playlists.map(playlist => ({
+        ...playlist,
+        tracks: playlist.tracks.map(trackId => exampleTracks.find(track => track.id === trackId))
+    }));
+
+    const selectedPlaylist = playlistsWithTracks.find((p) => p.id === playlistId);
     const selectedTrack = exampleTracks.find((t) => t.id === trackId);
-
-    const addNewPlaylist = (title) => {
-        console.log(title);
-
-        const id = playlists.reduce((maxId, p) => Math.max(maxId, p.id), 0) + 1;
-        setPlaylists([...playlists, { id, title, tracks: [] }]);
-    };
-
     return (
         <div className="ui container">
             <h1>My Playlists</h1>
@@ -31,14 +27,10 @@ export function Playlist() {
                 <div className="ui six wide column">
                     <h3>Playlists</h3>
                     <PlaylistForm onSubmit={addNewPlaylist} />
-                    <PlaylistList
-                        playlists={playlists}
-                    />
+                    <PlaylistList playlists={playlists} />
                 </div>
                 <div className="ui ten wide column">
-                    <Tracklist
-                        playlist={selectedPlaylist}
-                    />
+                    <Tracklist playlist={selectedPlaylist} />
                 </div>
             </div>
             <div className="ui divider"></div>

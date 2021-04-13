@@ -1,8 +1,8 @@
-export function Field({ label, placeholder }) {
+export function Field({ name, label, placeholder, value, onChange }) {
     return (
         <div className="field">
             <label>{label}</label>
-            <input required type="text" placeholder={placeholder} />
+            <input name={name} value={value} onChange={onChange} required type="text" placeholder={placeholder} />
         </div>
     );
 }
