@@ -1,16 +1,40 @@
-import { Track } from "./Track";
-import { TrackModal } from "./TrackModal";
+import { Track } from './Track';
+import { TrackModal } from './TrackModal';
 
-import { exampleTracks } from "../../domain/track";
-import { useState } from "react";
-
-
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getTracks } from '../../state/tracks/selectors';
 
 export function Tracks() {
-    const [open, setOpen] = useState(true);
+    const tracks = useSelector(getTracks);
+    const [open, setOpen] = useState(false);
+    const [editedTrack, setEditedTrack] = useState({});
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const handleNew = () => {
+        setEditedTrack({});
+        handleOpen();
+    }
+
+    const handleEdit = (track) => {
+        setEditedTrack(track);
+        handleOpen();
+    };
+
+    const handleDelete = (track) => {
+        // todo
+    };
+
+    const handleSubmit = (track) => {
+        console.log(track);
+        if(!track.id) {
+            // új track
+        } else {
+            // track módosítás
+        }
+    };
 
     return (
         <>
@@ -19,7 +43,7 @@ export function Tracks() {
                     href="#"
                     className="ui right floated green button"
                     id="newModal"
-                    onClick={handleOpen}
+                    onClick={handleNew}
                 >
                     <i className="plus icon"></i>
                     New track
@@ -34,16 +58,24 @@ export function Tracks() {
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        {exampleTracks.map(track => (
-                            <Track key={track.id} track={track} />
+                        {tracks.map((track) => (
+                            <Track
+                                key={track.id}
+                                track={track}
+                                onEdit={() => handleEdit(track)}
+                                onDelete={() => handleDelete(track)}
+                            />
                         ))}
-                        
                     </tbody>
                 </table>
             </div>
 
-            <TrackModal open={open} onClose={handleClose} />
+            <TrackModal
+                open={open}
+                onClose={handleClose}
+                onSubmit={handleSubmit}
+                track={editedTrack}
+            />
         </>
     );
 }

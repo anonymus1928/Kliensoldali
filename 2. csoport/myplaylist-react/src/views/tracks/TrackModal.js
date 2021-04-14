@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from 'semantic-ui-react';
 
 import { Field } from './Field';
@@ -12,8 +12,15 @@ const defaultState = {
     lyricsURL: '',
 };
 
-export function TrackModal({ open, onClose }) {
+export function TrackModal({ open, onClose, onSubmit, track }) {
     const [formState, setFormState] = useState(defaultState);
+
+    const resetFormState = (state) => setFormState(state);
+    useEffect(() => {
+        if(open) {
+            resetFormState({ ...defaultState, ...track });
+        }
+    }, [open, track]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,7 +29,9 @@ export function TrackModal({ open, onClose }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formState);
+        // console.log(formState);
+        onSubmit(formState);
+        onClose();
     };
     return (
         <Modal
