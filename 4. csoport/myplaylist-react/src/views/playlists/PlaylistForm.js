@@ -1,12 +1,15 @@
 import { useState } from "react";
 import cn from 'classnames';
+import { useDispatch } from "react-redux";
+import { addPlaylist } from "../../state/playlists/actions";
 
-export function PlaylistForm({ onSubmit }) {
+export function PlaylistForm() {
     // Referenciával
     // const inputRef = useRef(null);
 
     const [value, setValue] = useState('');
     const [error, setError] = useState(false);
+    const dispatch = useDispatch();
 
 
     const handleSubmit = e => {
@@ -17,7 +20,8 @@ export function PlaylistForm({ onSubmit }) {
             return;
         }
         setError(false);
-        onSubmit(value);
+
+        dispatch(addPlaylist(value));
         setValue('');
     }
 

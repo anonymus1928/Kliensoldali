@@ -2,13 +2,15 @@ import { Track } from './Track';
 import { TrackModal } from './TrackModal';
 
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getTracks } from '../../state/tracks/selectors';
+import { addTrack, deleteTrack, updateTrack } from '../../state/tracks/actions';
 
 export function Tracks() {
     const tracks = useSelector(getTracks);
     const [open, setOpen] = useState(false);
     const [editedTrack, setEditedTrack] = useState({});
+    const dispach = useDispatch();
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -24,15 +26,17 @@ export function Tracks() {
     };
 
     const handleDelete = (track) => {
-        // todo
+        dispach(deleteTrack(track));
     };
 
     const handleSubmit = (track) => {
         console.log(track);
         if(!track.id) {
             // új track
+            dispach(addTrack(track));
         } else {
             // track módosítás
+            dispach(updateTrack(track));
         }
     };
 

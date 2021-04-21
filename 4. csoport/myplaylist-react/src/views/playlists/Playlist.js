@@ -3,30 +3,32 @@ import { PlaylistList } from './PlaylistList';
 import { TrackDetails } from './TrackDetails';
 import { Tracklist } from './Tracklist';
 
-import { exampleTracks } from '../../domain/track';
 import { useParams } from 'react-router';
-import { useContext } from 'react';
-import { PlaylistsContext } from '../../state/PlaylistsProvider';
+// import { useContext } from 'react';
+// import { PlaylistsContext } from '../../state/PlaylistsProvider';
+import { useSelector } from 'react-redux';
+import { getPlaylists } from '../../state/playlists/selectors';
+import { getTracks } from '../../state/tracks/selectors';
+import { getPlaylistsWithTracks } from '../../state/selectors';
 
 export function Playlist() {
     const { playlistId, trackId } = useParams();
 
-    const { playlists, addNewPlaylist } = useContext(PlaylistsContext);
+    // const { playlists, addNewPlaylist } = useContext(PlaylistsContext);
+    const playlists = useSelector(getPlaylists);
+    const tracks = useSelector(getTracks);
 
-    const playlistsWithTracks = playlists.map(playlist => ({
-        ...playlist,
-        tracks: playlist.tracks.map(trackId => exampleTracks.find(track => track.id === trackId))
-    }));
+    const playlistsWithTracks = useSelector(getPlaylistsWithTracks);
 
     const selectedPlaylist = playlistsWithTracks.find((p) => p.id === playlistId);
-    const selectedTrack = exampleTracks.find((t) => t.id === trackId);
+    const selectedTrack = tracks.find((t) => t.id === trackId);
     return (
         <div className="ui container">
             <h1>My Playlists</h1>
             <div className="ui stackable two column grid">
                 <div className="ui six wide column">
                     <h3>Playlists</h3>
-                    <PlaylistForm onSubmit={addNewPlaylist} />
+                    <PlaylistForm />
                     <PlaylistList playlists={playlists} />
                 </div>
                 <div className="ui ten wide column">

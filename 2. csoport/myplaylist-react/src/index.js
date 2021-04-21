@@ -25,7 +25,6 @@ const render = () => {
 
 async function start() {
     const newPlaylists = await playlistsStorage.fill(examplePlaylists);
-    console.log(newPlaylists);
 
     render();
 }

@@ -1,17 +1,21 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addPlaylist } from "../../state/playlists/actions";
 
-export function PlaylistForm({ onSubmit }) {
+export function PlaylistForm() {
     // Referenciával
     // const inputRef = useRef(null);
 
     // State-tel
     const [value, setValue] = useState('');
+    const dispatch = useDispatch();
 
     const handleSubmit = e => {
         e.preventDefault();
+        setValue('');
         // console.log(inputRef.current.value); // referencia
 
-        onSubmit(value);
+        dispatch(addPlaylist(value));
     }
     return (
         <details open>

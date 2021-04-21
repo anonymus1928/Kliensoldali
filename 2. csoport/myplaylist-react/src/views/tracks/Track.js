@@ -1,13 +1,22 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
-import { PlaylistsContext } from '../../state/PlaylistsProvider';
+import { addTrackToPlaylist } from '../../state/playlists/actions';
+import { getPlaylists } from '../../state/playlists/selectors';
+// import { PlaylistsContext } from '../../state/PlaylistsProvider';
 
 export function Track({ track, onEdit, onDelete }) {
-    const { playlists } = useContext(PlaylistsContext);
+    // const { playlists } = useContext(PlaylistsContext);
+    const playlists = useSelector(getPlaylists);
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const dispatch = useDispatch();
+    const handleAddTrackToPlaylist = (playlistId, trackId) => {
+        dispatch(addTrackToPlaylist(playlistId, trackId));
+    };
     return (
         <tr>
             <td>
@@ -35,7 +44,18 @@ export function Track({ track, onEdit, onDelete }) {
                             />
                         </div>
                         {playlists.map((playlist) => (
-                            <div key={playlist.id} className="item">{playlist.title}</div>
+                            <div
+                                onClick={() =>
+                                    handleAddTrackToPlaylist(
+                                        playlist.id,
+                                        track.id
+                                    )
+                                }
+                                key={playlist.id}
+                                className="item"
+                            >
+                                {playlist.title}
+                            </div>
                         ))}
                     </Dropdown.Menu>
                 </Dropdown>

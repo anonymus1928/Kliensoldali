@@ -1,14 +1,22 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
-import { PlaylistsContext } from '../../state/PlaylistsProvider';
+import { getPlaylists } from '../../state/playlists/selectors';
+import { useDispatch } from 'react-redux';
+import { addTrackToPlaylist } from '../../state/playlists/actions';
 
 export function Track({ track, onEdit, onDelete }) {
-    const { playlists } = useContext(PlaylistsContext);
-
+    // const { playlists } = useContext(PlaylistsContext);
+    const playlists = useSelector(getPlaylists);
+    const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const handleClick = (playlistId, trackId) => {
+        dispatch(addTrackToPlaylist(playlistId, trackId));
+    }
 
     return (
         <tr>
@@ -37,7 +45,7 @@ export function Track({ track, onEdit, onDelete }) {
                             />
                         </div>
                         {playlists.map((playlist) => (
-                            <div key={playlist.id} className="item">
+                            <div onClick={() => handleClick(playlist.id, track.id)} key={playlist.id} className="item">
                                 {playlist.title}
                             </div>
                         ))}

@@ -12,8 +12,6 @@ import { Provider } from 'react-redux';
 
 const store = configureStore();
 
-store.dispatch({ type: 'ADD_TRACK', payload: { title: 'q', artist: 'q' } });
-
 const render = () => {
     ReactDOM.render(
         <Provider store={store}>
@@ -27,7 +25,6 @@ const render = () => {
 
 async function start() {
     const newPlaylists = await playlistsStorage.fill(examplePlaylists);
-    console.log(newPlaylists);
 
     render();
 }

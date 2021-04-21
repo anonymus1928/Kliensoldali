@@ -4,8 +4,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { tracksReducer } from './tracks/reducer';
 import { playlistsReducer } from './playlists/reducer';
 
-// const rootReducer = (state = initialState, action) => {
-//     const { type, payload } = action;
+// const rootReducer = ( = initialState, action) => {
+//     const { type, pastateyload } = action;
 
 //     return {
 //         tracks: tracksReducer(state.tracks, action),

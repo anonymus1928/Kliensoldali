@@ -53,6 +53,7 @@ export function TrackModal({ open, onClose, onSubmit, track }) {
                                 onChange={handleChange}
                                 label="Author"
                                 placeholder="John Williams"
+                                required
                             />
                             <Field
                                 name="title"
@@ -60,6 +61,7 @@ export function TrackModal({ open, onClose, onSubmit, track }) {
                                 onChange={handleChange}
                                 label="Track name"
                                 placeholder="Imperial March"
+                                required
                             />
                             <Field
                                 name="length"
