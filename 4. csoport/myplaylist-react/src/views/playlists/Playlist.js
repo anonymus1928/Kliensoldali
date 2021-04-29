@@ -8,7 +8,6 @@ import { useParams } from 'react-router';
 // import { PlaylistsContext } from '../../state/PlaylistsProvider';
 import { useSelector } from 'react-redux';
 import { getPlaylists } from '../../state/playlists/selectors';
-import { getTracks } from '../../state/tracks/selectors';
 import { getPlaylistsWithTracks } from '../../state/selectors';
 
 export function Playlist() {
@@ -16,12 +15,11 @@ export function Playlist() {
 
     // const { playlists, addNewPlaylist } = useContext(PlaylistsContext);
     const playlists = useSelector(getPlaylists);
-    const tracks = useSelector(getTracks);
 
     const playlistsWithTracks = useSelector(getPlaylistsWithTracks);
 
     const selectedPlaylist = playlistsWithTracks.find((p) => p.id === playlistId);
-    const selectedTrack = tracks.find((t) => t.id === trackId);
+    const selectedTrack = selectedPlaylist && selectedPlaylist.tracks.find((t) => t.id === trackId);
     return (
         <div className="ui container">
             <h1>My Playlists</h1>

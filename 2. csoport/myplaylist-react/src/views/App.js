@@ -4,8 +4,26 @@ import { Playlists } from './playlists/Playlists';
 import { Tracks } from './tracks/Tracks';
 import { Search } from './search/Search';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchPlaylists, setPlaylists } from '../state/playlists/actions';
+import { fetchTracks, setTracks } from '../state/tracks/actions';
+import { playlistsStorage } from '../api/PlaylistsStorage';
+import { exampleTracks } from "../domain/track";
+import { examplePlaylists } from "../domain/playlist";
+import { tracksStorage } from '../api/TracksStorage';
 
 export function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        // playlistsStorage.fill(examplePlaylists).then(playlists => dispatch(setPlaylists(playlists)));
+        // tracksStorage.fill(exampleTracks).then(tracks => dispatch(setTracks(tracks)));
+
+        dispatch(fetchPlaylists());
+        dispatch(fetchTracks());
+    }, [dispatch]);
+
     return (
         <BrowserRouter>
             <Layout>

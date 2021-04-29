@@ -3,7 +3,6 @@ import { PlaylistLists } from './PlaylistList';
 import { TrackDetails } from './TrackDetails';
 import { Tracklist } from './Tracklist';
 
-import { exampleTracks } from '../../domain/track';
 import { useParams } from 'react-router';
 // import { PlaylistsContext } from '../../state/PlaylistsProvider';
 import { useSelector } from 'react-redux';
@@ -18,10 +17,8 @@ export function Playlists() {
 
     const playlistsWithTracks = useSelector(getPlaylistsWithTracks);
 
-    const selectedPlaylist = playlistsWithTracks.find(
-        (p) => p.id === playlistId
-    );
-    const selectedTrack = exampleTracks.find((t) => t.id === trackId);
+    const selectedPlaylist = playlistsWithTracks.find((p) => p.id === playlistId);
+    const selectedTrack = selectedPlaylist && selectedPlaylist.tracks.find((t) => t.id === trackId);
 
     return (
         <div className="ui container">

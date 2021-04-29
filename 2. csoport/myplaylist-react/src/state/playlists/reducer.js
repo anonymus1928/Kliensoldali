@@ -1,28 +1,24 @@
-import { examplePlaylists } from '../../domain/playlist';
-import { ADD_PLAYLIST, ADD_TRACK_TO_PLAYLIST } from './actions';
+import { ADD_PLAYLIST, SET_PLAYLISTS, UPDATE_PLAYLIST } from './actions';
 
-const initialState = examplePlaylists;
+const initialState = [];
 
 export const playlistsReducer = (state = initialState, action) => {
     const { type, payload } = action;
 
-    if(type === ADD_PLAYLIST) {
-        return [...state, payload];
+    if (type === SET_PLAYLISTS) {
+        return payload;
     }
 
-    if(type === ADD_TRACK_TO_PLAYLIST) {
+    if (type === ADD_PLAYLIST) {
         const playlists = state;
-        const {playlistId, trackId} = payload;
+        const newPlaylist = payload;
+        return [...playlists, newPlaylist];
+    }
 
-        const playlist = playlists.find(p => p.id === playlistId);
-        if(!playlist) return state;
-        if(playlist.tracks.includes(trackId)) return state;
-        const modifiedPlaylist = {
-            ...playlist,
-            tracks: playlist.tracks.concat(trackId),
-        };
-
-        return playlists.map(p => p.id !== playlistId ? p : modifiedPlaylist);
+    if (type === UPDATE_PLAYLIST) {
+        const playlists = state;
+        const playlist = payload;
+        return playlists.map(p => p.id !== playlist.id ? p : playlist);
     }
 
     return state;
