@@ -1,4 +1,5 @@
 import { tracksApi } from "../../api/rest";
+import { sendMessage } from "../messages/actions";
 import { deleteTrackFromAllPlaylists } from "../playlists/actions";
 
 export const SET_TRACKS = 'SET_TRACKS';
@@ -29,22 +30,25 @@ export const deleteTrackFromStore = (track) => ({
 
 // Async
 export const fetchTracks = () => async dispatch => {
-    const playlists = await tracksApi.getAll()
-    dispatch(setTracks(playlists));
+    const tracks = await tracksApi.getAll()
+    dispatch(setTracks(tracks));
 }
 
 export const addTrack = (track) => async dispatch => {
     const newTrack = await tracksApi.create(track);
+    dispatch(sendMessage(`Track created: ${track.artist} | ${track.title}`));
     dispatch(addTrackToStore(newTrack));
 }
 
 export const updateTrack = (track) => async dispatch => {
     const updatedTrack = await tracksApi.update(track);
+    dispatch(sendMessage(`Track updated: ${track.artist} | ${track.title}`));
     dispatch(updateTrackToStore(updatedTrack));
 }
 
 export const deleteTrack = (track) => async dispatch => {
     await tracksApi.delete(track.id);
+    dispatch(sendMessage(`Track deleted: ${track.artist} | ${track.title}`));
     dispatch(deleteTrackFromStore(track));
     dispatch(deleteTrackFromAllPlaylists(track));
 }

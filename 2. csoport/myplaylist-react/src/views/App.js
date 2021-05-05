@@ -9,9 +9,10 @@ import { useEffect } from 'react';
 import { fetchPlaylists, setPlaylists } from '../state/playlists/actions';
 import { fetchTracks, setTracks } from '../state/tracks/actions';
 import { playlistsStorage } from '../api/PlaylistsStorage';
-import { exampleTracks } from "../domain/track";
-import { examplePlaylists } from "../domain/playlist";
+import { exampleTracks } from '../domain/track';
+import { examplePlaylists } from '../domain/playlist';
 import { tracksStorage } from '../api/TracksStorage';
+import { wsConnect } from '../state/messages/actions';
 
 export function App() {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export function App() {
 
         dispatch(fetchPlaylists());
         dispatch(fetchTracks());
+        dispatch(wsConnect());
     }, [dispatch]);
 
     return (
