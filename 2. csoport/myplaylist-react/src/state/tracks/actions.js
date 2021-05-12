@@ -1,6 +1,8 @@
 import { tracksApi } from "../../api/rest";
 import { sendMessage } from "../messages/actions";
 import { deleteTrackFromAllPlaylists } from "../playlists/actions";
+import { getToken } from '../auth/selectors'
+import { addToken } from "../auth/actions";
 
 export const SET_TRACKS = 'SET_TRACKS';
 export const ADD_TRACK = 'ADD_TRACK';
@@ -29,26 +31,27 @@ export const deleteTrackFromStore = (track) => ({
 });
 
 // Async
-export const fetchTracks = () => async dispatch => {
-    const tracks = await tracksApi.getAll()
+export const fetchTracks = () => addToken(async (dispatch, getState, _, token) => {
+    // const token = getToken(getState());
+    const tracks = await tracksApi.getAll(token)
     dispatch(setTracks(tracks));
-}
+});
 
-export const addTrack = (track) => async dispatch => {
-    const newTrack = await tracksApi.create(track);
+export const addTrack = (track) => addToken(async (dispatch, getState, _, token) => {
+    const newTrack = await tracksApi.create(track, token);
     dispatch(sendMessage(`Track created: ${track.artist} | ${track.title}`));
     dispatch(addTrackToStore(newTrack));
-}
+});
 
-export const updateTrack = (track) => async dispatch => {
-    const updatedTrack = await tracksApi.update(track);
+export const updateTrack = (track) => addToken(async (dispatch, getState, _, token) => {
+    const updatedTrack = await tracksApi.update(track, token);
     dispatch(sendMessage(`Track updated: ${track.artist} | ${track.title}`));
     dispatch(updateTrackToStore(updatedTrack));
-}
+});
 
-export const deleteTrack = (track) => async dispatch => {
-    await tracksApi.delete(track.id);
+export const deleteTrack = (track) => addToken(async (dispatch, getState, _, token) => {
+    await tracksApi.delete(track.id, token);
     dispatch(sendMessage(`Track deleted: ${track.artist} | ${track.title}`));
     dispatch(deleteTrackFromStore(track));
     dispatch(deleteTrackFromAllPlaylists(track));
-}
+});

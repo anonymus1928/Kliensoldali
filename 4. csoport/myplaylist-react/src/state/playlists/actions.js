@@ -1,4 +1,5 @@
 import { playlistsApi } from '../../api/rest';
+import { addToken, addUserId } from '../auth/actions';
 import { getPlaylists } from './selectors';
 
 export const SET_PLAYLISTS = 'SET_PLAYLISTS';
@@ -22,17 +23,18 @@ export const updatePlaylist = (updatedPlaylist) => ({
 });
 
 // Async
-export const fetchPlaylists = () => async (dispatch) => {
-    const playlists = await playlistsApi.getAll();
+export const fetchPlaylists = () => addToken(addUserId(async (dispatch, getState, _, token, userId) => {
+    // const token = getToken(getState());
+    const playlists = await playlistsApi.getAll(token, userId);
     dispatch(setPlaylists(playlists));
-};
+}));
 
-export const addPlaylist = (title) => async (dispatch) => {
-    const newPlaylist = await playlistsApi.create({ title, tracks: [] });
+export const addPlaylist = (title) => addToken(async (dispatch, getState, _, token) => {
+    const newPlaylist = await playlistsApi.create({ title, tracks: [] }, token);
     dispatch(addPlaylistToStore(newPlaylist));
-};
+});
 
-export const addTrackToPlaylist = (playlistId, trackId) => async (dispatch, getState) => {
+export const addTrackToPlaylist = (playlistId, trackId) => addToken(async (dispatch, getState, _, token) => {
     const playlists = getPlaylists(getState());
     const playlist = playlists.find((p) => p.id === playlistId);
     if (!playlist) return;
@@ -41,11 +43,11 @@ export const addTrackToPlaylist = (playlistId, trackId) => async (dispatch, getS
         ...playlist,
         tracks: playlist.tracks.concat(trackId),
     };
-    const updatedPlaylist = await playlistsApi.update(modifiedPlaylist);
+    const updatedPlaylist = await playlistsApi.update(modifiedPlaylist, token);
     dispatch(updatePlaylist(updatedPlaylist));
-};
+});
 
-export const deleteTrackFromAllPlaylists = track => async (dispatch, getState) => {
+export const deleteTrackFromAllPlaylists = track => addToken(async (dispatch, getState, _, token) => {
     const playlists = getPlaylists(getState());
     for (const playlist of playlists) {
         if(playlist.tracks.includes(track.id)) {
@@ -53,8 +55,8 @@ export const deleteTrackFromAllPlaylists = track => async (dispatch, getState) =
                 ...playlist,
                 tracks: playlist.tracks.filter(id => id !== track.id),
             };
-            const updatedPlaylist = await playlistsApi.update(modifiedPlaylist);
+            const updatedPlaylist = await playlistsApi.update(modifiedPlaylist, token);
             dispatch(updatePlaylist(updatedPlaylist));
         }
     }
-}
+});

@@ -3,27 +3,35 @@ import { Home } from './home/Home';
 import { Playlist } from './playlists/Playlist';
 import { Tracks } from './tracks/Tracks';
 import { Search } from './search/Search';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchPlaylists, setPlaylists } from '../state/playlists/actions';
-import { fetchTracks, setTracks } from '../state/tracks/actions';
-import { playlistsStorage } from '../api/PlaylistsStorage';
-import { exampleTracks } from "../domain/track";
-import { examplePlaylists } from "../domain/playlist";
-import { tracksStorage } from '../api/TracksStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPlaylists } from '../state/playlists/actions';
+import { fetchTracks } from '../state/tracks/actions';
 import { wsConnect } from '../state/messages/actions';
+import { getIsLoggedIn } from '../state/auth/selectors';
+import { restoreUser } from '../state/auth/actions';
 
 export function App() {
     const dispatch = useDispatch();
+    const isLoggedIn = useSelector(getIsLoggedIn);
 
     useEffect(() => {
         // playlistsStorage.fill(examplePlaylists).then(playlists => dispatch(setPlaylists(playlists)));
         // tracksStorage.fill(exampleTracks).then(tracks => dispatch(setTracks(tracks)));
 
-        dispatch(fetchPlaylists());
-        dispatch(fetchTracks());
+        if (isLoggedIn) {
+            dispatch(fetchPlaylists());
+            dispatch(fetchTracks());
+        }
+    }, [dispatch, isLoggedIn]);
+
+    useEffect(() => {
         dispatch(wsConnect());
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(restoreUser());
     }, [dispatch]);
 
     return (
@@ -34,16 +42,28 @@ export function App() {
                         <Home />
                     </Route>
                     <Route path="/playlists/:playlistId?/:trackId?">
-                        <Playlist />
+                        {isLoggedIn ? <Playlist /> : <Redirect to="/" />}
                     </Route>
-                    <Route path="/tracks">
-                        <Tracks />
-                    </Route>
-                    <Route path="/search">
+                    {isLoggedIn && (
+                        <Route path="/tracks">
+                            <Tracks />
+                        </Route>
+                    )}
+                    <PrivateRoute path="/search">
                         <Search />
-                    </Route>
+                    </PrivateRoute>
+                    <Redirect to="/" />
                 </Switch>
             </Layout>
         </BrowserRouter>
     );
 }
+
+const PrivateRoute = ({ children, ...props }) => {
+    const isLoggedIn = useSelector(getIsLoggedIn);
+    return (
+        <Route {...props}>
+            {isLoggedIn ? children : <Redirect to="/" />}
+        </Route>
+    );
+};

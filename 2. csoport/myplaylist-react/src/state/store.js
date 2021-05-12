@@ -5,6 +5,7 @@ import { tracksReducer } from './tracks/reducer';
 import { playlistsReducer } from './playlists/reducer';
 import thunk from 'redux-thunk';
 import { messageReducer } from './messages/reducer';
+import { authReducer } from './auth/reducer';
 
 // const rootReducer = (state = initialState, action) => {
 //     return {
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     tracks: tracksReducer,
     playlists: playlistsReducer,
     messages: messageReducer,
+    auth: authReducer,
 });
 
 const logger = createLogger({

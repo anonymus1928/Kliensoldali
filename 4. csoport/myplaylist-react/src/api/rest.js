@@ -1,16 +1,23 @@
-const ACCESS_TOKEN =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2MTk2MTIxNDYsImV4cCI6MTYyMjIwNDE0NiwiYXVkIjoiaHR0cHM6Ly95b3VyZG9tYWluLmNvbSIsImlzcyI6ImZlYXRoZXJzIiwic3ViIjoiMSIsImp0aSI6IjkyNWVmN2UwLTNiNDctNDhkZi05ZTJhLTUxYzhjNDU2ODhjZiJ9.Wuktapqj3fgOpfe7oPOUMMyXQtJ845NuyINvOun061A';
+// const ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2MTk2MTIxNDYsImV4cCI6MTYyMjIwNDE0NiwiYXVkIjoiaHR0cHM6Ly95b3VyZG9tYWluLmNvbSIsImlzcyI6ImZlYXRoZXJzIiwic3ViIjoiMSIsImp0aSI6IjkyNWVmN2UwLTNiNDctNDhkZi05ZTJhLTUxYzhjNDU2ODhjZiJ9.Wuktapqj3fgOpfe7oPOUMMyXQtJ845NuyINvOun061A';
 
 const BASE_URL = 'http://localhost:3030';
 
-const request = async (path = '', options = {}) => {
+// let token = null;
+
+const request = async (path = '', options = {}, token, userId) => {
     let url = `${BASE_URL}${path}`;
     const headers = {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
         Accept: 'application/json',
         ...options.headers,
     };
+    if(token) {
+        headers.Authorization = `Bearer ${token}`;
+    }
+    if(userId) {
+        url += `?userId=${userId}`;
+    }
     const response = await fetch(url, {
         ...options,
         headers
@@ -24,11 +31,11 @@ class RestApi {
         this.convertFn = convertFn;
     }
 
-    async create(object) {
+    async create(object, token) {
         const newPlaylist = await request(this.resourcePath, {
             method: 'POST',
             body: JSON.stringify(object),
-        });
+        }, token);
         return this.convertFn(newPlaylist);
     }
 
@@ -41,25 +48,25 @@ class RestApi {
         return newObjects;
     }
 
-    async getAll() {
-        const json = await request(this.resourcePath);
+    async getAll(token, userId) {
+        const json = await request(this.resourcePath, {}, token, userId);
         const playlists = json.data;
         return playlists.map(this.convertFn);
     }
 
-    async update(object) {
+    async update(object, token) {
         if (!object.id) return;
         const updatedPlaylist = await request(`${this.resourcePath}/${object.id}`, {
             method: 'PUT',
             body: JSON.stringify(object),
-        });
+        }, token);
         return this.convertFn(updatedPlaylist);
     }
 
-    async delete(id) {
+    async delete(id, token) {
         await request(`${this.resourcePath}/${id}`, {
             method: 'DELETE',
-        })
+        }, token)
     }
 }
 
@@ -77,3 +84,36 @@ const convertTrackId = (track) => ({
 });
 
 export const tracksApi = new RestApi('/tracks', convertTrackId);
+
+
+
+class AuthApi {
+    async login(username, password) {
+        const authData = {
+            email: username,
+            password,
+            strategy: 'local'
+        };
+        const response = await request('/authentication', {
+            method: 'POST',
+            body: JSON.stringify(authData),
+        });
+        // token = response.accessToken;
+        window.sessionStorage.setItem('api-token', response.accessToken);
+        return response;
+    }
+
+    logout() {
+        window.sessionStorage.removeItem('api-token');
+    }
+
+    getToken() {
+        return window.sessionStorage.getItem('api-token');
+    }
+
+    async getUserById(userId, token) {
+        return await request(`/users/${userId}`, {}, token);
+    }
+}
+
+export const authApi = new AuthApi();
