@@ -34,6 +34,10 @@
     .progress {
       z-index: 2000;
     }
+    .background {
+      background-repeat: no-repeat;
+      height: 20em;
+    }
   </style>
 </head>
 
@@ -100,6 +104,7 @@
   </section>
 
   <!-- Services Section -->
+  <!--
   <section class="page-section" id="services">
     <div class="container">
       <h2 class="text-center mt-0" data-scroll data-scroll-animation="fadeInUp">At Your Service</h2>
@@ -135,90 +140,18 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 
   <!-- Portfolio Section -->
   <section id="portfolio">
     <div class="container-fluid p-0">
       <div class="row no-gutters">
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/1.jpg">
-            <img class="img-fluid" src="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/thumbnails/1.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/2.jpg">
-            <img class="img-fluid" src="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/thumbnails/2.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/3.jpg">
-            <img class="img-fluid" src="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/thumbnails/3.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/4.jpg">
-            <img class="img-fluid" src="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/thumbnails/4.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/5.jpg">
-            <img class="img-fluid" src="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/thumbnails/5.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/6.jpg">
-            <img class="img-fluid" src="https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/thumbnails/6.jpg" alt="">
-            <div class="portfolio-box-caption p-3">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
+        <div class="col-lg-4 col-sm-6 background" style="background-image: url(https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/1.jpg);"></div>
+        <div class="col-lg-4 col-sm-6 background" style="background-image: url(https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/2.jpg);"></div>
+        <div class="col-lg-4 col-sm-6 background" style="background-image: url(https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/3.jpg);"></div>
+        <div class="col-lg-4 col-sm-6 background" style="background-image: url(https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/4.jpg);"></div>
+        <div class="col-lg-4 col-sm-6 background" style="background-image: url(https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/5.jpg);"></div>
+        <div class="col-lg-4 col-sm-6 background" style="background-image: url(https://cdn.jsdelivr.net/gh/BlackrockDigital/startbootstrap-creative@v5.1.8/img/portfolio/fullsize/6.jpg);"></div>
       </div>
     </div>
   </section>
@@ -258,7 +191,7 @@
   <!-- Footer -->
   <footer class="bg-light py-5">
     <div class="container">
-      <div class="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap</div>
+      <div class="small text-center text-muted">Copyright &copy; <span>2019</span> - Start Bootstrap</div>
     </div>
   </footer>
 
