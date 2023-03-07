@@ -2,17 +2,13 @@
 
 ## Elérhetőségek
 
-- Email: lx12ag[kukac]inf.elte.hu
+- Email: nemeth.tamas[kukac]inf.elte.hu
 - a tárgy honlapja: https://webprogramozas.inf.elte.hu
 
-## 2-es csoport
+## 5-ös csoport
 
-Szerda 8:30-10:00
+Kedd 8:15-9:45 (LD-2-219)
 
-Gyakorlatok: https://youtube.com/playlist?list=PLkIuuhyjdT90vStYvWP6HogZYDF9YIxh3
+## 6-os csoport
 
-## 4-es csoport
-
-Szerda 10:15-11:45
-
-Gyakorlatok: https://youtube.com/playlist?list=PLkIuuhyjdT93CcaauQLwrCS6Nn5C-_3vY
+Kedd 10:15-11:45 (LD-2-218)
