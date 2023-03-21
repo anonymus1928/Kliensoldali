@@ -10,7 +10,7 @@ https://github.com/anonymus1928/Kliensoldali/blob/master/ZH/csoportzh.zip
 
 ### 1. ELTE kari létszámadatok (8 pont)
 
-A [Chart.js](https://www.chartjs.org/) javascript könyvtár segítségével készíts egy fánk (doughnut) vagy torta (pie) diagramot ! A létszámadatokat a ```1. feladat/index.html``` file-ban lévő táblázat tartalmazza.
+A [Chart.js](https://www.chartjs.org/) javascript könyvtár segítségével készíts egy fánk (doughnut) vagy torta (pie) diagramot ! A létszámadatokat a ```1. feladat/index.html``` file-ban lévő táblázat tartalmazza. A táblázat fejléc celláinak színei határozzák meg a diagram körcikkeinek színeit!
 
 1. CDN segítségével illeszd be a megfelelő helyre a ChartJS könyvtárat! [Segítség](https://www.chartjs.org/docs/latest/getting-started/) *(1 pont)*
 
