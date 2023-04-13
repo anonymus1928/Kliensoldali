@@ -4,15 +4,22 @@ import { TrackList } from "./TrackList";
 import { TrackDetails } from "./TrackDetails";
 
 import { examplePlaylists } from "../../domain/playlist";
+import { useParams } from "react-router-dom";
 
 export const Playlists = () => {
-  const selectedPlaylistId = 1;
+  const { playlistID, trackID } = useParams();
+  const selectedPlaylistId = parseInt(playlistID);
 
   const playlists = examplePlaylists;
 
   // Computed values
   const selectedPlaylist = playlists.find((pl) => pl.id === selectedPlaylistId);
-  console.log(selectedPlaylist);
+  // console.log(selectedPlaylist);
+
+  const selectedTrackID = parseInt(trackID);
+  const selectedTrack = selectedPlaylist.tracks.find((tr) => tr.id === selectedTrackID);
+
+  console.log(selectedTrackID);
 
   return (
     <div className="ui container">
@@ -24,11 +31,15 @@ export const Playlists = () => {
           <PlaylistList playlists={playlists} selectedPlaylistId={selectedPlaylistId} />
         </div>
         <div className="ui ten wide column">
-          <TrackList />
+          {selectedPlaylist && 
+            <TrackList playlist={selectedPlaylist} />
+          }
         </div>
       </div>
       <div className="ui divider"></div>
-      <TrackDetails />
+          {selectedTrack && 
+            <TrackDetails track={selectedTrack} />
+          }
     </div>
   );
 };
