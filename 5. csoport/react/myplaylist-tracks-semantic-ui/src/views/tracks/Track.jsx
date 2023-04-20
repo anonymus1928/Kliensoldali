@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-export function Track({ track }) {
+export function Track({ track, removeTrack }) {
+
   return (
     <tr>
       <td>
@@ -12,7 +13,7 @@ export function Track({ track }) {
         <button className="ui icon button">
           <i className="edit icon"></i>
         </button>
-        <button className="ui icon button red">
+        <button className="ui icon button red" onClick={e => {e.preventDefault(); removeTrack(track.id)}}>
           <i className="trash icon"></i>
         </button>
       </td>
