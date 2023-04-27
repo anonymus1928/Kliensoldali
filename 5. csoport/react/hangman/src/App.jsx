@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import Buttons from "./Buttons";
 import Hangman from "./Hangman";
 import Result from "./Result";
@@ -10,7 +12,7 @@ const App = () => {
   // Application state (data)
   const maxTips = 9;
   const word = "alma";
-  const tips = ["a", "l", "s", "s", "s", "s", "s", "s", "s"];
+  const tips = ["a", "l", "s"];
   const buttonText = "aábcdeéfghiíjklmnoóöőpqrstuúüűvwxyz";
 
   // Event handlers
@@ -21,14 +23,14 @@ const App = () => {
     <>
       <h1>Hangman</h1>
 
-      <Word />
+      <Word word={word} tips={tips} />
 
       <button>New game</button>
-      <Buttons />
+      <Buttons buttonText={buttonText} tips={tips} />
 
-      <Result />
+      <Result maxTips={maxTips} tips={tips} />
 
-      <Hangman />
+      <Hangman tips={tips} />
     </>
   );
 };

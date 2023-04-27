@@ -1,5 +1,7 @@
-const Hangman = () => {
-  const wrong = 3;
+/* eslint-disable react/prop-types */
+
+const Hangman = ({tips}) => {
+  const wrong = tips.length;
 
   const parts = [
     <line x1="0" y1="99%" x2="100%" y2="99%" key={1} />,

@@ -1,22 +1,18 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+
 import cn from "classnames";
 import Letter from "./Letter";
 
-const Word = () => {
+const Word = ({word, tips}) => {
   const won = false;
   return (
     <div id="szo" className={cn({ nyer: won })}>
-      <Letter visible={false} missing={false}>
-        a
-      </Letter>
-      <Letter visible={true} missing={false}>
-        b
-      </Letter>
-      <Letter visible={false} missing={true}>
-        c
-      </Letter>
-      <Letter visible={true} missing={true}>
-        d
-      </Letter>
+      {word.split('').map((s, i) => (
+        <Letter key={i} visible={tips.includes(s)} missing={false}>
+          {s}
+        </Letter>
+      ))}
     </div>
   );
 };

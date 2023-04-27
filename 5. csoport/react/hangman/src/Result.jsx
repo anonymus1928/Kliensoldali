@@ -1,6 +1,6 @@
-const Result = () => {
-  const wrong = 3;
-  const maxTips = 9;
+/* eslint-disable react/prop-types */
+const Result = ({maxTips, tips}) => {
+  const wrong = tips.length;
   return (
     <div id="eredmeny">
       {wrong}/{maxTips}

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "semantic-ui-react";
 
 const Field = ({ label, ...rest }) => {
@@ -23,10 +23,16 @@ const defaultState = {
   lyricsURL: "",
 };
 
-export function TrackForm({ open, handleClose, tracks, setTracks }) {
+export function TrackForm({ open, onClose, onSubmit, track }) {
   const [formState, setFormState] = useState(defaultState);
 
-  const resetForm = () => setFormState(defaultState);
+  const resetForm = state => setFormState(state);
+
+  useEffect(() => {
+    if(open) {
+      resetForm({...defaultState, ...track});
+    }
+  }, [open, track]);
 
   const handleChange = e => {
     const {name, value} = e.target;
@@ -35,16 +41,14 @@ export function TrackForm({ open, handleClose, tracks, setTracks }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(formState);
-    const id = Math.max(...tracks.map(track => track.id)) + 1;
-    setTracks([...tracks, {...formState, id}]);
-    resetForm();
-    handleClose();
+    // console.log(formState);
+    onSubmit(formState);
+    onClose();
   }
   
 
   return (
-    <Modal as="form" open={open} onClose={() => {resetForm(); handleClose();}} closeIcon onSubmit={handleSubmit}>
+    <Modal as="form" open={open} onClose={onClose} closeIcon onSubmit={handleSubmit}>
       <div className="header">Add new Track</div>
       <div className="image content">
         <div className="description">
@@ -63,7 +67,7 @@ export function TrackForm({ open, handleClose, tracks, setTracks }) {
         </div>
       </div>
       <div className="actions">
-        <div className="ui black deny button" onClick={() => {resetForm(); handleClose();}}>Cancel</div>
+        <div className="ui black deny button" onClick={onClose}>Cancel</div>
         <button className="ui positive right labeled icon button">
           Add
           <i className="plus icon"></i>

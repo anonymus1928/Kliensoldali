@@ -1,8 +1,13 @@
-const Buttons = () => {
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+
+
+const Buttons = ({buttonText, tips}) => {
   return (
     <div id="betuk">
-      <button disabled={false}>a</button>
-      <button disabled={true}>b</button>
+      {buttonText.split('').map((s, i) => (
+        <button key={`${s}-${i}`} disabled={tips.includes(s)}>{s}</button>
+      ))}
     </div>
   );
 };
