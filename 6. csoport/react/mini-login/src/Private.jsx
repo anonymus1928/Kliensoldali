@@ -1,9 +1,10 @@
-const Private = () => {
+/* eslint-disable react/prop-types */
+const Private = ({logout, loggedInUser}) => {
   return (
     <div>
-      <h1>Szia, User!</h1>
+      <h1>Szia, {loggedInUser}!</h1>
       <div>Formázott tartalom</div>
-      <button className="logoutBtn">Kijelentkezés</button>
+      <button onClick={logout} className="logoutBtn">Kijelentkezés</button>
     </div>
   );
 };
