@@ -1,16 +1,17 @@
+/* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from "react-redux";
-import { removeHaiku, selectHaiku, selectHaikus } from "./haikuSlice";
+import { selectHaikus } from "../../state/haikus/selectors";
 
 export const HaikuList = () => {
   const {haikus} = useSelector(selectHaikus);
   const dispatch = useDispatch();
 
   const handleClick = i => {
-    dispatch(selectHaiku(i));
+    // dispatch(selectHaiku(i));
   }
 
   const handleRemoveHaiku = () => {
-    dispatch(removeHaiku());
+    // dispatch(removeHaiku());
   }
 
   return (

@@ -15,7 +15,7 @@ const haikuSlice = createSlice({
   initialState,
   reducers: {
     changeText: (state, { payload }) => {
-      state.edit = payload;
+      state.editor = payload;
     },
     addHaiku: (state, { payload: haiku }) => {
       state.haikus.push(haiku);
@@ -25,7 +25,7 @@ const haikuSlice = createSlice({
       state.editor = state.haikus[index];
     },
     modifyHaiku: (state, { payload: text }) => {
-      if (state.selectedInde !== null) {
+      if (state.selectedIndex !== null) {
         state.haikus[state.selectedIndex] = text;
       }
     },
@@ -35,4 +35,28 @@ const haikuSlice = createSlice({
       }
     },
   },
+});
+
+// Reducer
+export const haikuReducer = haikuSlice.reducer;
+
+// Action
+export const { changeText, addHaiku, modifyHaiku, removeHaiku, selectHaiku } = haikuSlice.actions;
+
+// Selector
+const vowels = "öüóeuioőúaéáűí";
+export const selectEditor = (state) => {
+  const { editor } = state;
+  const lines = editor.split("\n");
+  const counts = lines.map((line) => line.split("").filter((c) => vowels.includes(c)).length);
+  return {
+    text: editor,
+    counts,
+    isHaiku: counts[0] === 5 && counts[1] === 7 && counts[2] === 5 && counts.length === 3,
+  };
+};
+
+export const selectHaikus = (state) => ({
+  haikus: state.haikus,
+  selectedIndex: state.selectedIndex,
 });

@@ -18,7 +18,7 @@ root.render(
 );
 
 // Log the initial state
-// console.log("Initial state: ", store.getState());
+//console.log("Initial state: ", store.getState());
 
 // Every time the state changes, log it
 // Note that subscribe() returns a function for unregistering the listener

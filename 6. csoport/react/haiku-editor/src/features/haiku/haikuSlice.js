@@ -28,11 +28,13 @@ const haikuSlice = createSlice({
     modifyHaiku: (state, { payload: text }) => {
       if (state.selectedIndex !== null) {
         state.haikus[state.selectedIndex] = text;
+        state.selectedIndex = null;
       }
     },
     removeHaiku: (state) => {
       if (state.selectedIndex !== null) {
         state.haikus.splice(state.selectedIndex, 1);
+        state.selectedIndex = null;
       }
     },
   },
@@ -56,3 +58,8 @@ export const selectEditor = (state) => {
         isHaiku: counts[0] === 5 && counts[1] === 7 && counts[2] === 5 && counts.length === 3,
     }
 }
+
+export const selectHaikus = (state) => ({
+  haikus: state.haikus,
+  selectedIndex: state.selectedIndex,
+})

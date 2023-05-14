@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from "react-redux";
-import { removeHaiku, selectHaiku, selectHaikus } from "./haikuSlice";
+import { selectHaikus } from "../../state/haikus/selectors";
+import { selectHaiku } from "../../state/selectedIndex/actions";
 
 export const HaikuList = () => {
   const dispatch = useDispatch();
@@ -10,7 +12,7 @@ export const HaikuList = () => {
   }
 
   const handleRemoveHaiku = () => {
-    dispatch(removeHaiku());
+    // dispatch(removeHaiku());
   }
 
   return (

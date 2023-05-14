@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { haikuReducer } from "../features/haiku/haikuSlice";
+import { graphiReducer } from "./graphiSlice";
 
 export const store = configureStore({
-  reducer: haikuReducer,
-});
+    reducer: graphiReducer
+})

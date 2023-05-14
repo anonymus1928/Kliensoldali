@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Editor.module.css";
-import { addHaiku, changeText, modifyHaiku, selectEditor, selectHaikus } from "./haikuSlice";
+import { changeText } from "../../state/editor/actions";
+import { selectEditor } from "../../state/editor/selectors";
+import { addHaiku } from "../../state/haikus/actions";
 
 export const Editor = () => {
   const { text, counts, isHaiku } = useSelector(selectEditor);
-  const { selectedIndex } = useSelector(selectHaikus);
+  // const { selectedIndex } = useSelector(selectHaikus);
   const dispatch = useDispatch();
   // console.log(changeText('asdfg'));
 
@@ -18,7 +20,7 @@ export const Editor = () => {
   };
 
   const handleModifyHaiku = () => {
-    dispatch(modifyHaiku(text));
+    // dispatch(modifyHaiku(text));
   };
 
   return (
@@ -32,7 +34,7 @@ export const Editor = () => {
       ></textarea>
       <p>Vowels per row: {counts.join(",")}</p>
       {isHaiku && <button onClick={handleNewHaiku}>Add</button>}
-      {isHaiku && selectedIndex !== null && <button onClick={handleModifyHaiku}>Save</button>}
+      {/* {isHaiku && selectedIndex !== null && <button onClick={handleModifyHaiku}>Save</button>} */}
     </div>
   );
 };
