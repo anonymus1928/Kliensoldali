@@ -19,7 +19,7 @@ export const GraphiLogics = () => {
   //     }, 3000);
   //     return () => clearTimeout(timer);
   //   }
-  // });
+  // }, [isSolutionChecked]);
 
   const handleClick = (i, j) => {
     dispatch(clickCell({i, j}));
@@ -30,7 +30,7 @@ export const GraphiLogics = () => {
       // dispatch(startSolutionCheck());
       dispatch(checkSolution());
     } else {
-      alert('Nyertél!')
+      alert('Nyertél!');
     }
   }
 

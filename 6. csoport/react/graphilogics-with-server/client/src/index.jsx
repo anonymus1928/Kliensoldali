@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import App from "./views/App";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import "./grafilogika.css";
 import { createRoot } from "react-dom/client";
@@ -18,8 +19,7 @@ root.render(
   </React.StrictMode>
 );
 
-store.dispatch({type: 'graphilogics/startGame'});
-
+store.dispatch({ type: "graphilogics/startGame" });
 
 // console.log('Initial state:', store.getState());
 

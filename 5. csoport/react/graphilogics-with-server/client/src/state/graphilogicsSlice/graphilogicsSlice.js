@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     solution: [' # ', '###', ' # '],
     table:    ['   ', '   ', '   '],
     isSolutionChecked: false,
-};
+}
 
 const graphilogicsSlice = createSlice({
     name: 'graphilogics',
     initialState,
     reducers: {
-        startGame: (state, { payload }) => {
+        startGame: (state) => {
             state.solution = ['### #  ##### ###', '#   #    #   #  ', '### #    #   ###', '#   #    #   #  ', '### ###  #   ###'];
             state.table =    ['                ', '                ', '                ', '                ', '                '];
         },
@@ -67,5 +67,5 @@ export const getTopNumbers  = (state) => doTheThing(transpose(state.solution.map
 
 
 // Utils
-const transpose = (matrix) => matrix[0].map((_, i) => matrix.map(row => row[i]));
-const doTheThing = (m) => m.map(row => row.replaceAll(/\s+/g, ' ').split(' ').filter((r) => r.length > 0)).map(r => r.map(c => c.length));
+const doTheThing = (matrix) => matrix.map(row => row.replaceAll(/\s+/g, ' ').split(' ').filter(r => r.length > 0)).map(r => r.map(c => c.length));
+const transpose  = (matrix) => matrix[0].map((_, i) => matrix.map(row => row[i]));
