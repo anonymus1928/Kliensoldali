@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GraphiLogics } from "./graphilogics/Graphilogics";
 import { Layout } from "./layout/Layout";
 import { Login } from "./auth/Login";
+import { RequireAuth } from "./auth/RequireAtuh";
 
 function App() {
   return (
@@ -12,9 +13,9 @@ function App() {
           <Route
             path="/"
             element={
-              // <RequireAuth>
+              <RequireAuth>
                 <GraphiLogics />
-              // </RequireAuth>
+              </RequireAuth>
             }
           />
         </Route>

@@ -7,7 +7,8 @@ import "./grafilogika.css";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./state/store";
-import { getSolution } from "./state/graphilogicsSlice/graphilogicsSlice";
+import { getSolution } from "./state/graphilogicsSlice";
+import { fetchList } from "./state/graphilogicsListSlice";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -30,3 +31,5 @@ store.dispatch({ type: "graphilogics/startGame" });
 // unsubscribe();
 
 // console.log(getSolution(store.getState()));
+
+store.dispatch(fetchList());

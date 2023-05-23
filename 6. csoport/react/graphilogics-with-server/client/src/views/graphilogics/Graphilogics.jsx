@@ -1,10 +1,21 @@
 /* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from "react-redux";
-import { checkSolution, clickCell, getIsSolutionChecked, getLeftNumbers, getSolution, getTable, getTopNumbers, startSolutionCheck, stopSolutionCheck } from "../../state/graphilogicsSlice/graphilogicsSlice";
+import { checkSolution, clickCell, getIsSolutionChecked, getLeftNumbers, getSolution, getTable, getTopNumbers, startSolutionCheck, stopSolutionCheck } from "../../state/graphilogicsSlice";
 import classNames from "classnames";
 import { useEffect } from "react";
+import { useGetPuzzlesQuery } from "../../state/graphilogicsApiSlice";
 
 export const GraphiLogics = () => {
+  const { isLoading, data } = useGetPuzzlesQuery();
+  console.log(data);
+
+  
+
+
+
+
+
+
   const dispatch = useDispatch();
   const solution = useSelector(getSolution);
   const table = useSelector(getTable);
@@ -32,6 +43,10 @@ export const GraphiLogics = () => {
     } else {
       alert('Nyertél!');
     }
+  }
+
+  if(isLoading) {
+    return 'Loading...';
   }
 
   return (

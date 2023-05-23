@@ -58,12 +58,12 @@ export const checkSolution = createAsyncThunk(
 export const graphilogicsReducer = graphilogicsSlice.reducer;
 
 // Selectors
-export const getSolution = (state) => state.solution;
-export const getTable = (state) => state.table;
-export const getIsSolutionChecked = (state) => state.isSolutionChecked;
+export const getSolution = (state) => state.graphilogics.solution;
+export const getTable = (state) => state.graphilogics.table;
+export const getIsSolutionChecked = (state) => state.graphilogics.isSolutionChecked;
 
-export const getLeftNumbers = (state) => doTheThing(state.solution);
-export const getTopNumbers  = (state) => doTheThing(transpose(state.solution.map(row => row.split(''))).map(row => row.join('')));
+export const getLeftNumbers = (state) => doTheThing(state.graphilogics.solution);
+export const getTopNumbers  = (state) => doTheThing(transpose(state.graphilogics.solution.map(row => row.split(''))).map(row => row.join('')));
 
 
 // Utils
