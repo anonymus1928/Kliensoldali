@@ -1,0 +1,9 @@
+.progress {
+    z-index: 2000;
+}
+
+
+/* 1. feladat */
+html {
+    scroll-behavior: smooth;
+}
