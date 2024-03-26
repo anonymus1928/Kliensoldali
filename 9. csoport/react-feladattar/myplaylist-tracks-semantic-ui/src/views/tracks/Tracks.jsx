@@ -1,14 +1,19 @@
 import { exampleTracks } from "../../domain/track";
 import { TrackForm } from "./TrackForm";
 import { Track } from "./Track";
+import { useState } from "react";
 
 export function Tracks() {
   const tracks = exampleTracks;
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <>
       <div className="ui container">
-        <button href="#" className="ui right floated green button" id="newModal">
+        <button href="#" className="ui right floated green button" id="newModal" onClick={handleOpen}>
           <i className="plus icon"></i>
           New track
         </button>
@@ -29,7 +34,7 @@ export function Tracks() {
         </table>
       </div>
 
-      <TrackForm />
+      <TrackForm open={open} onClose={handleClose} />
     </>
   );
 }
