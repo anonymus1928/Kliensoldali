@@ -1,36 +1,30 @@
-import bonjovi from "../../assets/bonjovi.jpg";
-
-export function TrackDetails() {
+export function TrackDetails({ track }) {
   return (
-    <div className="ui segment">
-      <div className="ui items">
-        <div className="item">
-          <div className="image">
-            <img src={bonjovi} alt="" />
+    <div className="item">
+        <div className="image">
+          <img src={track.thumbnailURL} />
+        </div>
+        <div className="content">
+          <a className="header">{track.title}</a>
+          <div className="meta">
+            <span>{track.artist}</span>
+            <span>{track.length}</span>
           </div>
-          <div className="content">
-            <div className="header">Track title</div>
-            <div className="meta">
-              <span>Track artist</span>
-              <span>Track length</span>
-            </div>
-            <div className="extra">
-              <a href="#" className="ui button tiny green button">
-                <i className="spotify icon"></i>
-                Listen on Spotify
-              </a>
-              <a href="#" className="ui button tiny orange button">
-                <i className="guitar icon"></i>
-                Show chords
-              </a>
-              <a href="#" className="ui button tiny teal button">
-                <i className="microphone icon"></i>
-                Show lyrics
-              </a>
-            </div>
+          <div className="extra">
+            <a href={track.spotifyURL} className="ui button tiny green button" target="_blank" rel="noreferrer">
+              <i className="spotify icon"></i>
+              Listen on Spotify
+            </a>
+            <a href={track.chordsURL} className="ui button tiny teal button" target="_blank" rel="noreferrer">
+              <i className="microphone icon"></i>
+              Show lyrics
+            </a>
+            <a href={track.lyricsURL} className="ui button tiny orange button" target="_blank" rel="noreferrer">
+              <i className="guitar icon"></i>
+              Show chords
+            </a>
           </div>
         </div>
       </div>
-    </div>
   );
 }
