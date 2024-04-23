@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "semantic-ui-react";
 
 /* eslint-disable react/prop-types */
@@ -21,10 +21,16 @@ const defaultState = {
   lyricsURL: "",
 };
 
-export function TrackForm({ open, onClose, onSubmit }) {
+export function TrackForm({ open, onClose, onSubmit, track }) {
   const [formState, setFormState] = useState(defaultState);
 
-  const resetForm = state => setFormState(defaultState);
+  const resetForm = state => setFormState(state);
+
+  useEffect(() => {
+    if(open) {
+      resetForm({ ...defaultState, ...track });
+    }
+  }, [open, track]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +40,7 @@ export function TrackForm({ open, onClose, onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formState);
-    resetForm();
+    // resetForm();
     onClose();
   };
 
