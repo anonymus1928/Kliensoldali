@@ -26,6 +26,12 @@ export const graphilogicsApiSlice = createApi({
         body,
       }),
     }),
+    getPuzzles: builder.query({
+      query: () => ({
+        url: "puzzles",
+      }),
+
+    }),
   }),
 });
 
@@ -33,4 +39,4 @@ export const graphilogicsApiSlice = createApi({
 export const graphilogicsApiReducer = graphilogicsApiSlice.reducer;
 
 // Hooks
-export const { useLoginMutation } = graphilogicsApiSlice;
+export const { useLoginMutation, useGetPuzzlesQuery } = graphilogicsApiSlice;

@@ -13,9 +13,9 @@ const graphilogicsListSlice = createSlice({
   name: "graphilogicsList",
   initialState,
   reducers: {
-    // setList: (state, { payload: puzzles }) => {
-    //   state.lists = puzzles;
-    // },
+    setList: (state, { payload: puzzles }) => {
+      state.lists = puzzles;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchList.fulfilled, (state, { payload: puzzles }) => {
@@ -37,8 +37,10 @@ export const { setList } = graphilogicsListSlice.actions;
 //     dispatch(setList(result.data));
 // }
 
-export const fetchList = createAsyncThunk("graphilogicsList/fetchList", async () => {
-  const response = await fetch("http://localhost:3030/puzzles");
-  const result = await response.json();
-  return result.data;
+export const fetchList = createAsyncThunk(
+  "graphilogicsList/fetchList",
+  async () => {
+    const response = await fetch("http://localhost:3030/puzzles");
+    const result = await response.json();
+    return result.data;
 });
