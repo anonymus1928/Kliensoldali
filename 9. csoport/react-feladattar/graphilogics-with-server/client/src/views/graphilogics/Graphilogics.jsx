@@ -1,4 +1,14 @@
+import { useDispatch, useSelector } from "react-redux";
+import { getLeftNumbers, getSolution, getTable, getTopNumbers } from "../../state/graphilogicsSlice";
+
 export const GraphiLogics = () => {
+
+  const dispatch = useDispatch();
+  const solution = useSelector(getSolution);
+  const table = useSelector(getTable);
+  const rows = useSelector(getLeftNumbers);
+  const cols = useSelector(getTopNumbers);
+  console.log(solution, table, rows, cols);
   return (
     <table id="layout">
       <tbody>
@@ -8,6 +18,7 @@ export const GraphiLogics = () => {
             <table id="felso">
               <tbody>
                 <tr>
+
                   <td>
                     <span>1</span>
                     <span>2</span>
