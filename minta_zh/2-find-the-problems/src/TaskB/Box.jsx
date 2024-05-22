@@ -1,14 +1,14 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 export const Box = (props) => {
-  const [color, setColor] = useState(props.color);
+  // const [color, setColor] = useState(props.color);
   return (
     <div
       style={{
         position: "absolute",
         top: `${props.y}px`,
         left: `${props.x}px`,
-        backgroundColor: color,
+        backgroundColor: props.color,
         width: "100px",
         height: "100px",
       }}

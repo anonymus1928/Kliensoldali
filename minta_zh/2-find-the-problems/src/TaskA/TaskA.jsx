@@ -25,8 +25,16 @@ export const TaskA = () => {
     const newMinute = increasedMinute % 60;
     const extraHour = Math.floor(increasedMinute / 60);
 
-    clock.time.hour += extraHour;
-    clock.time.minute = newMinute;
+    // clock.time.hour += extraHour;
+    // clock.time.minute = newMinute;
+    setClock({
+      ...clock,
+      time: {
+        ...clock.time,
+        hour: clock.time.hour + extraHour,
+        minute: newMinute,
+      },
+    });
   };
 
   return (
