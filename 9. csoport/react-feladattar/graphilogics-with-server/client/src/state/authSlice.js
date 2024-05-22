@@ -24,5 +24,5 @@ export const authReducer = authSlice.reducer;
 export const { login, logout } = authSlice.actions;
 
 // Selectors
-export const getLoggedInUser = (state) => state.user;
-export const getAuthToken = (state) => state.token;
+export const getLoggedInUser = (state) => state.auth.user;
+export const getAuthToken = (state) => state.auth.token;
